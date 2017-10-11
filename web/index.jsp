@@ -8,9 +8,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>spring-json</title>
+    <script type="text/javascript" src="js/personTest.js"></script>
+    <script type="text/javascript" src="./js/jquery-1.4.4.js"></script>
   </head>
   <body>
-  $END$
+  <table>
+    <tr>
+      <td>id</td>
+      <td><input id="id" value="100"/></td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td><input id="name" value="jack"/></td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td><input id="status" value="true"/> </td>
+    </tr>
+    <tr>
+      <td><input type="button" id="profile" value="Profile——GET" /></td>
+      <td><input type="button" id="login" value="Login——POST" /></td>
+    </tr>
+  </table>
   </body>
 </html>
