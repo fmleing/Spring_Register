@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="main.java"/>
+    <context:annotation-config/>
+    <!--view jstl解析器-->
+    <!--
+    这里使用了JstlView作为视图解析器。同时，
+    指定前缀路径为"/WEB-INF/page/"，后缀路径为".jsp"。
+    也就是说，Spring容器将会在这个路径中寻找匹配的jsp文件！
+    -->
+    <bean id="jstlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:viewClass="org.springframework.web.servlet.view.JstlView"
+          p:prefix="/WEB-INF/page/" p:suffix=".jsp"/>
+</beans>

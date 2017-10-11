@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+    <context:component-scan base-package="main.java"/>
+    <!--dataSource config-->
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close"
+          lazy-init="false"
+          p:driverClassName="${dataSource.driverClassName}"
+          p:url="${dataSource.url}"
+          p:username="${dataSource.username}"
+          p:password="${dataSource.password}"
+          p:maxActive="${dataSource.maxActive}"
+          p:maxIdle="${dataSource.maxIdle}"
+          p:maxWait="${dataSource.maxWait}"
+    />
+    <!--jdbcTemplate Config-->
+    <!--
+    这个配置很关键，如果你要使用其他的ORM框架，
+    同样需要配置这样的模板类，在Dao实现中无需继承JdbcDaoSupport类。
+    不需要明确JdbcTemplate的id（id="jdbcTemplate"）吗？不再需要了！
+    -->
+    <bean class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="dataSource"/>
+    <!--tx 开启注解-->
+    <bean   id="transactionManager"
+            class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+            p:dataSource-ref="dataSource"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>
